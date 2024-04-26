@@ -1,0 +1,41 @@
+<video id="video-background"  #myVideo autoplay muted loop playsinline>
+  <source src="../../../assets/Pikachu Pixel Animated Loop.mp4" type="video/mp4">
+</video>
+
+<button (click)="goHome()" class="m-4" style="background-color: #fffeac;" mat-raised-button>Voltar ao Menu</button>
+  <div class="flex items-center justify-center  ">
+    <div class="flex space-x-4 justify-center p-8">
+      <span class="font-extrabold text-3xl text-center"  *ngIf="spinner && exibe_title"><img src="../../../assets/loading.gif"></span>
+      <div class="scroll">
+        <div class="flex flex-wrap -mx-4 container p-4">
+          <div  *ngFor="let item of deckCards" class="w-full md:w-1/2 lg:w-1/5 px-4 mb-4">
+            <img *ngIf="!spinner" (click)="addCard(item)" [src]="item.images.small" class="w-36 h-auto">
+          </div>
+      </div>
+      </div>
+      <div  *ngIf="exibeFiltro" style="height: 350px; position: fixed; right: 50px;" class="info-deck p-10 shadow-md rounded-md">
+        <mat-form-field>
+          <mat-label>Nome do Deck</mat-label>
+          <input  [(ngModel)]="nameDeck"  matInput #input>
+        </mat-form-field><br>
+        <mat-form-field>
+          <mat-label>Filtrar  Carta</mat-label>
+          <input (keyup.enter)="getCardByName()" [(ngModel)]="userInput" matInput placeholder="Presisone ENTER" #input>
+        </mat-form-field> 
+        <h3 class="text-center">Cartas Adicionadas: {{contadorCards}}</h3>
+        <div class="flex w-full justify-around">
+          <button [disabled]="paginatorOFF" (click)="onBeforePage()" mat-mini-fab style="background-color: #fffeac; color: black;">
+            <mat-icon>navigate_before</mat-icon>
+          </button>
+          <button class="mt-14" (click)="createDeck()" style="background-color: #fffeac; color: black;" mat-raised-button>Salvar Deck <mat-icon aria-hidden="false" fontIcon="add_circle"></mat-icon></button>
+          <span style=" position: fixed; right: 185px;" class="text-center mt-2">{{contadorPage}}/68</span> <br>
+          <button [disabled]="paginatorOFF" (click)="onNextPage()" class="ml-3" mat-mini-fab style="background-color: #fffeac; color: black;">
+            <mat-icon>navigate_next</mat-icon>
+          </button>
+        </div>
+    </div>
+      
+    </div>
+  </div>
+  
+    
